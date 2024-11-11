@@ -35,6 +35,16 @@ class Run:
 
     @staticmethod
     def do(bird):
+        if int(bird.frame) == 4 and bird.action == 1:
+            bird.action = 2
+            bird.action_frame = 337
+        elif int(bird.frame) == 4 and bird.action == 2:
+            bird.action = 3
+            bird.action_frame = 506
+        elif int(bird.frame) == 3 and bird.action == 3:
+            bird.frame = 0
+            bird.action = 1
+            bird.action_frame = 169
         bird.frame = (bird.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 5
         bird.x += bird.dir * RUN_SPEED_PPS * game_framework.frame_time
         if bird.x>1500:
@@ -46,14 +56,10 @@ class Run:
 
     @staticmethod
     def draw(bird):
-        bird.image.clip_composite_draw(int(bird.frame) * 183, bird.action * 169, 183, 169, 0, bird.flip,bird.x, bird.y,64,64)
-        if int(bird.frame) == 4 and bird.action == 1:
-            bird.action = 2
-        elif int(bird.frame) == 4 and bird.action == 2:
-            bird.action = 3
-        elif int(bird.frame) == 3 and bird.action == 3:
-            bird.action = 1
-            bird.frame = 0
+        bird.image.clip_composite_draw(int(bird.frame) * 183, bird.action_frame, 183, 169, 0, bird.flip,bird.x, bird.y,64,64)
+
+
+
 
 
 
@@ -66,6 +72,7 @@ class Bird:
 
         self.x, self.y = randint(0,800), 300
         self.action = 1
+        self.action_frame = 169
         self.dir = 1
         self.frame = 0
         self.flip = ''
