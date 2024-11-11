@@ -4,6 +4,7 @@ import game_framework
 import game_world
 from grass import Grass
 from boy import Boy
+from bird import Bird
 
 # boy = None
 
@@ -26,6 +27,11 @@ def init():
 
     boy = Boy()
     game_world.add_object(boy, 1)
+
+
+    for i in range(10):
+        bird = Bird()
+        game_world.add_object(bird,1)
 
 
 def finish():
